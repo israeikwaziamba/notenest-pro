@@ -1,0 +1,98 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  body {
+    background-color: #f7f9fc;
+    color: #2c3e50;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  header h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  header p {
+    color: #7f8c8d;
+    margin-bottom: 30px;
+  }
+  
+  .form-section h2,
+  .liste-objectifs h2 {
+    margin: 20px 0 10px;
+    font-size: 20px;
+  }
+  
+  form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  form input,
+  form button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #bdc3c7;
+    border-radius: 5px;
+  }
+  
+  form input {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  form button:hover {
+    background-color: #2980b9;
+  }
+  
+  #objectif-liste {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #objectif-liste li {
+    background: #ecf0f1;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #objectif-liste button {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #objectif-liste button:hover {
+    background: #c0392b;
+  }

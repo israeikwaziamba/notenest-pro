@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes Cours | NoteNest Pro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6fc;
+      color: #2e2e2e;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right, #dbeafe, #eff6ff);
+      padding: 40px;
+    }
+
+    .hero-text {
+      max-width: 60%;
+    }
+
+    .hero h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #1e3a8a;
+    }
+
+    .hero p {
+      font-size: 1.1em;
+      color: #374151;
+    }
+
+    .hero-image img {
+      width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .upload-section,
+    .pdf-list-section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .upload-section h2,
+    .pdf-list-section h2 {
+      color: #1d4ed8;
+    }
+
+    input[type="file"] {
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #1d4ed8;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .pdf-list .pdf-item {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Bienvenue dans ton espace de cours ✨</h1>
+      <p>Ici, tu peux rassembler tous tes fichiers, apprendre à ton rythme, et construire ton avenir avec sérieux.  
+      Commence par ajouter tes cours en PDF, et reprends le contrôle de ton apprentissage 💼📘</p>
+    </div>
+    <div class="hero-image">
+      <!-- 👉 Remplace par une image dans ton dossier /images -->
+      <img src="images/student-studying.png" alt="Étudiant concentré" />
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="upload-section">
+      <h2>📚 Ajouter un fichier de cours</h2>
+      <form id="pdfForm">
+        <input type="file" id="pdfUpload" accept="application/pdf">
+        <button type="submit">Ajouter ce fichier</button>
+      </form>
+    </section>
+
+    <section class="pdf-list-section">
+      <h2>🗂️ Mes fichiers ajoutés</h2>
+      <div id="pdfList" class="pdf-list">
+        <p>Aucun fichier pour le moment. Commence à bâtir ta bibliothèque de savoir 💡</p>
+      </div>
+    </section>
+  </main>
+
+  <section style="margin-top: 40px; padding: 20px; background: #e0f2fe; border-radius: 10px;">
+    <h2>🕒 Rappels & Notifications</h2>
+    <p>Planifie un rappel pour réviser, préparer un devoir ou un examen 📚</p>
+    
+    <form id="reminderForm" style="margin-top: 15px;">
+      <input type="text" id="reminderText" placeholder="Titre du rappel (ex: Réviser Algo)" required>
+      <input type="datetime-local" id="reminderDate" required>
+      <button type="submit">📅 Programmer le rappel</button>
+    </form>
+  
+    <ul id="reminderList" style="margin-top: 20px;"></ul>
+  </section>
+  <script>
+    document.getElementById('pdfForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const fileInput = document.getElementById('pdfUpload');
+      const file = fileInput.files[0];
+
+      if (file && file.type === 'application/pdf') {
+        const fileURL = URL.createObjectURL(file);
+
+        const container = document.createElement('div');
+        container.className = 'pdf-item';
+
+        const link = document.createElement('a');
+        link.href = fileURL;
+        link.textContent = `📄 ${file.name}`;
+        link.target = '_blank';
+
+        container.appendChild(link);
+        document.getElementById('pdfList').appendChild(container);
+
+        fileInput.value = '';
+      } else {
+        alert("Ajoute uniquement des fichiers PDF, s'il te plaît !");
+      }
+    });
+  </script>
+
+<script>
+  const reminderForm = document.getElementById('reminderForm');
+  const reminderText = document.getElementById('reminderText');
+  const reminderDate = document.getElementById('reminderDate');
+  const reminderList = document.getElementById('reminderList');
+  let reminders = [];
+
+  // Demander la permission de notification au chargement
+  document.addEventListener("DOMContentLoaded", () => {
+    if ("Notification" in window) {
+      Notification.requestPermission();
+    }
+  });
+
+  // Soumission du formulaire de rappel
+  reminderForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const text = reminderText.value.trim();
+    const date = new Date(reminderDate.value);
+
+    if (!text || isNaN(date.getTime()) || date <= new Date()) {
+      alert("Choisis une date/heure valide dans le futur.");
+      return;
+    }
+
+    const id = setTimeout(() => {
+      sendNotification(text);
+    }, date.getTime() - Date.now());
+
+    reminders.push({ text, date, id });
+
+    const item = document.createElement('li');
+    item.textContent = `${text} → ${date.toLocaleString()}`;
+    reminderList.appendChild(item);
+
+    reminderText.value = '';
+    reminderDate.value = '';
+  });
+
+  // Envoyer la notification
+  function sendNotification(message) {
+    if (Notification.permission === "granted") {
+      new Notification("📢 Rappel NoteNest Pro", {
+        body: message,
+        icon: "https://cdn-icons-png.flaticon.com/512/565/565547.png"
+      });
+    }
+  }
+</script>
+</body>
+</html>

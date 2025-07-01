@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mes Notes | NoteNest Pro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f1f5f9;
+      padding: 30px;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px;
+      background: linear-gradient(to right, #c7d2fe, #bfdbfe);
+      border-radius: 10px;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      color: #1e40af;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1em;
+      color: #334155;
+    }
+
+    form {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    input, button {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+    }
+
+    input[type="text"], input[type="number"] {
+      width: 200px;
+    }
+
+    button {
+      background-color: #1d4ed8;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 15px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background-color: #e0e7ff;
+      color: #1e3a8a;
+    }
+
+    tfoot td {
+      font-weight: bold;
+      background: #f3f4f6;
+    }
+
+    .centered {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📝 Mes Notes Personnalisées</h1>
+    <p>Entre chaque note obtenue et sa base (ex : 15 sur 20, 7 sur 10) — la moyenne s’ajuste automatiquement 🔍</p>
+  </header>
+
+  <form id="noteForm">
+    <input type="text" id="courseName" placeholder="Nom du cours" required>
+    <input type="number" id="noteObtenue" placeholder="Note obtenue" step="0.1" required>
+    <input type="number" id="noteMaximale" placeholder="Note sur combien ?" step="0.1" required>
+    <button type="submit">Ajouter la note</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Cours</th>
+        <th>Note</th>
+        <th>Pourcentage</th>
+      </tr>
+    </thead>
+    <tbody id="notesTableBody">
+      <tr><td colspan="3" class="centered">Aucune note enregistrée pour l’instant 📄</td></tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2"><strong>Moyenne Générale</strong></td>
+        <td id="average">-</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <script>
+    const form = document.getElementById('noteForm');
+    const courseInput = document.getElementById('courseName');
+    const noteObtenueInput = document.getElementById('noteObtenue');
+    const noteMaximaleInput = document.getElementById('noteMaximale');
+    const tableBody = document.getElementById('notesTableBody');
+    const averageDisplay = document.getElementById('average');
+
+    let notes = [];
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const course = courseInput.value.trim();
+      const note = parseFloat(noteObtenueInput.value);
+      const max = parseFloat(noteMaximaleInput.value);
+
+      if (!course || isNaN(note) || isNaN(max) || note < 0 || max <= 0 || note > max) {
+        alert("Vérifie les champs. La note doit être positive et inférieure ou égale à la note maximale.");
+        return;
+      }
+
+      notes.push({ course, note, max });
+      updateTable();
+      courseInput.value = '';
+      noteObtenueInput.value = '';
+      noteMaximaleInput.value = '';
+    });
+
+    function updateTable() {
+      tableBody.innerHTML = '';
+      let totalPourcentage = 0;
+
+      notes.forEach(noteObj => {
+        const { course, note, max } = noteObj;
+        const pourcentage = ((note / max) * 100).toFixed(2);
+        totalPourcentage += parseFloat(pourcentage);
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${course}</td>
+          <td>${note} / ${max}</td>
+          <td>${pourcentage} %</td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      const moyenne = (totalPourcentage / notes.length).toFixed(2);
+      averageDisplay.textContent = `${moyenne} %`;
+    }
+  </script>
+</body>
+</html>

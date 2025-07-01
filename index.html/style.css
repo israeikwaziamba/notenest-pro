@@ -1,0 +1,185 @@
+/* Import de la police Inter */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background: #f5f5eb; /* Beige doux */
+  color: #2e3d27;       /* Vert foncé-gris pour le texte */
+  line-height: 1.6;
+}
+
+/* Conteneur principal */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* ======= Header ======= */
+header {
+  background-color: #d8e7d1; /* Beige-vert pastel */
+  padding: 40px 0 30px;
+  text-align: center;
+  border-bottom: 3px solid #a0c1a1;
+}
+
+header h1 {
+  font-size: 2.5em;
+  color: #2f6636; /* Vert profond */
+  margin-bottom: 10px;
+}
+
+header .subtitle {
+  font-size: 1.1em;
+  color: #4c5c4a;
+  margin-bottom: 25px;
+}
+
+.nav-menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #3b6e47;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: #1e4528;
+}
+
+/* ======= Section Intro ======= */
+.intro {
+  background-color: #f0f7ef;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.intro h2 {
+  font-size: 2em;
+  color: #2f6636;
+}
+
+.highlight {
+  color: #4a8f58;
+  font-weight: 700;
+}
+
+.intro p {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+
+.features-list {
+  list-style: square;
+  text-align: left;
+  margin-top: 20px;
+  display: inline-block;
+  padding-left: 20px;
+  color: #3b4f3d;
+}
+
+/* ======= Section Image ======= */
+.about-image {
+  background-color: #ffffff;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.about-image h2 {
+  color: #2f6636;
+}
+
+.about-image p {
+  font-size: 1.1em;
+  color: #4b4b4b;
+}
+
+/* ======= Fonctionnalités ======= */
+.features {
+  background-color: #e9f3e5;
+  padding: 50px 0;
+}
+
+.features h2 {
+  text-align: center;
+  color: #2f6636;
+  margin-bottom: 30px;
+}
+
+.features ol {
+  max-width: 800px;
+  margin: auto;
+  color: #2f3f2f;
+  padding-left: 20px;
+}
+
+.features li {
+  margin-bottom: 20px;
+}
+
+/* ======= Footer ======= */
+footer {
+  background-color: #c9dbc5;
+  color: #2e3d27;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.9em;
+  border-top: 2px solid #a0c1a1;
+}
+
+footer strong {
+  color: #2f6636;
+}
+.nav-menu .btn-inscription {
+  background-color: #8bc34a;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-menu .btn-inscription:hover {
+  background-color: #7cb342;
+}
+/* ======= Liens Connexion & Inscription en haut à droite ======= */
+.auth-links {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.link-connexion {
+  color: #3b6e47;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link-connexion:hover {
+  color: #1e4528;
+}
+
+.btn-inscription {
+  background-color: #8bc34a;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-inscription:hover {
+  background-color: #7cb342;
+}
