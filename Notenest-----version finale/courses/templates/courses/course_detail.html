@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ course.title }}</h2>
+<p>{{ course.description }}</p>
+<p>Catégorie : {{ course.category }}</p>
+<p>Date d’ajout : {{ course.upload_date }}</p>
+
+<h3>Fichiers associés :</h3>
+<ul>
+    {% for file in course.files.all %}
+        <li><a href="{{ file.file.url }}">{{ file.file.name }}</a></li>
+    {% empty %}
+        <li>Aucun fichier.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

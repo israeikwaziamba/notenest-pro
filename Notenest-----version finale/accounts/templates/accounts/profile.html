@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Profil de {{ user.username }}</h2>
+<p>Email : {{ user.email }}</p>
+<a href="{% url 'accounts:logout' %}">Se déconnecter</a>
+{% endblock %}

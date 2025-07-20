@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Mes Objectifs</h2>
+<a href="{% url 'goal_add' %}">Ajouter un objectif</a>
+<ul>
+  {% for goal in goals %}
+    <li>
+      <strong>{{ goal.title }}</strong> – 
+      {{ goal.deadline }} – 
+      {% if goal.completed %}✅ Terminé{% else %}❌ En cours{% endif %}
+      – <a href="{% url 'goal_update' goal.pk %}">Modifier</a>
+    </li>
+  {% empty %}
+    <li>Aucun objectif pour l’instant.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

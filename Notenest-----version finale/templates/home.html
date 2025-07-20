@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Accueil - NoteNest Pro{% endblock %}
+
+{% block content %}
+    <section class="home">
+        <h2>Bienvenue sur NoteNest Pro 👋</h2>
+        <p>Gère facilement tes cours, tes notes et tes objectifs académiques.</p>
+
+        <div class="quick-access">
+            <a href="{% url 'courses:list' %}" class="button">Voir mes cours</a>
+            <a href="{% url 'grades:list' %}" class="button">Mes notes</a>
+            <a href="{% url 'goals:list' %}" class="button">Mes objectifs</a>
+        </div>
+    </section>
+{% endblock %}

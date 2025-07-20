@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Statistiques des notes</h2>
+<p>Moyenne générale : {{ moyenne }}</p>
+<a href="{% url 'grade_list' %}">Retour à la liste</a>
+{% endblock %}

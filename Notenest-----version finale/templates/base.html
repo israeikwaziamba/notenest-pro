@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}NoteNest Pro{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <nav>
+            <h1><a href="{% url 'home' %}">NoteNest Pro</a></h1>
+            <ul>
+                <li><a href="{% url 'courses:list' %}">Cours</a></li>
+                <li><a href="{% url 'grades:list' %}">Notes</a></li>
+                <li><a href="{% url 'goals:list' %}">Objectifs</a></li>
+                <li><a href="{% url 'accounts:profile' %}">Profil</a></li>
+                <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 - NoteNest Pro by Israel</p>
+    </footer>
+
+    <!-- JS -->
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Liste des cours</h2>
+<a href="{% url 'courses:course_add' %}">Ajouter un cours</a>
+<ul>
+    {% for course in courses %}
+        <li><a href="{% url 'courses:course_detail' course.pk %}">{{ course.title }}</a></li>
+    {% empty %}
+        <li>Aucun cours disponible.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
